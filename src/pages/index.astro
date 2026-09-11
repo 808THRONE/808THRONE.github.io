@@ -1,0 +1,138 @@
+---
+// index.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import SkillsGrid from '../components/SkillsGrid.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import BlogCard from '../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+let featuredProjects: any[] = [];
+let latestPosts: any[] = [];
+
+try {
+  const allProjects = await getCollection('projects');
+  featuredProjects = allProjects
+    .filter((p) => p.data.featured)
+    .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99))
+    .slice(0, 3);
+
+  const allPosts = await getCollection('blog');
+  latestPosts = allPosts
+    .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+    .slice(0, 3);
+} catch (e) {
+  console.log("Collections loading...", e);
+}
+---
+
+<BaseLayout title="Iheb Brahmi (808THRONE) | THEREDREBEL">
+  <!-- Hero Section -->
+  <Hero />
+
+  <!-- About & Capabilities Matrix -->
+  <SkillsGrid />
+
+  <!-- Featured Projects Section -->
+  <section class="py-16 md:py-24 border-b border-canvas">
+    <div class="max-w-[1400px] w-full mx-auto px-4 sm:px-8 lg:px-12">
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div class="space-y-3 max-w-2xl">
+          <div class="inline-flex items-center gap-2 text-xs font-mono tracking-widest text-[#ff2a42] font-semibold uppercase">
+            <span class="w-2 h-2 rounded-full bg-[#ff2a42]"></span>
+            FEATURED PROJECTS
+          </div>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-canvas-text tracking-tight">
+            Building useful and creative solutions.
+          </h2>
+          <p class="text-canvas-muted text-base sm:text-lg leading-relaxed">
+            From AI-powered edge tools to homelab infrastructure, embedded systems, and security tooling — here are some of my key engineering projects.
+          </p>
+        </div>
+
+        <div>
+          <a
+            href="/projects"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-surface hover:bg-surface-hover text-canvas-text font-semibold text-sm border border-canvas hover:border-[#ff2a42] transition-colors cursor-pointer shadow-sm"
+          >
+            View All Projects
+            <span class="text-[#ff2a42]">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Projects Grid (3 columns on wide screen) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {featuredProjects.map((project) => (
+          <ProjectCard
+            title={project.data.title}
+            category={project.data.category}
+            description={project.data.description}
+            tags={project.data.tags}
+            image={project.data.image}
+            slug={project.id.replace(/\.md$/, '')}
+            github={project.data.github}
+            metrics={project.data.metrics}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Blog Posts Section -->
+  <section class="py-16 md:py-24">
+    <div class="max-w-[1400px] w-full mx-auto px-4 sm:px-8 lg:px-12">
+      <!-- Section Header -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div class="space-y-3 max-w-2xl">
+          <div class="inline-flex items-center gap-2 text-xs font-mono tracking-widest text-[#ff2a42] font-semibold uppercase">
+            <span class="w-2 h-2 rounded-full bg-[#ff2a42]"></span>
+            LATEST BLOG POSTS
+          </div>
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-canvas-text tracking-tight">
+            Ideas, guides and practical lessons.
+          </h2>
+          <p class="text-canvas-muted text-base sm:text-lg leading-relaxed">
+            Short and focused posts about what I'm learning, building, and exploring across systems, AI, and cybersecurity.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <a
+            href="/blog"
+            class="inline-flex items-center gap-2 text-sm font-semibold text-canvas-muted hover:text-[#ff2a42] transition-colors group cursor-pointer"
+          >
+            View all posts
+            <span class="group-hover:translate-x-1 transition-transform">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Blog Posts Grid (3 columns on wide screen) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {latestPosts.map((post) => (
+          <BlogCard
+            title={post.data.title}
+            category={post.data.category}
+            pubDate={post.data.pubDate}
+            slug={post.id.replace(/\.md$/, '')}
+            image={post.data.image}
+            description={post.data.description}
+            readingTime={post.data.readingTime}
+          />
+        ))}
+      </div>
+
+      <!-- Mobile View All Button -->
+      <div class="mt-8 md:hidden text-center">
+        <a
+          href="/blog"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-surface text-canvas-text font-medium text-sm border border-canvas"
+        >
+          View All Posts →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

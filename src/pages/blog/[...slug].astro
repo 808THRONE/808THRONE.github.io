@@ -1,0 +1,190 @@
+---
+// blog/[...slug].astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id.replace(/\.md$/, '') },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric'
+}).format(post.data.pubDate);
+---
+
+<BaseLayout
+  title={`${post.data.title} | Iheb Brahmi`}
+  description={post.data.description}
+  image={post.data.image}
+>
+  <article class="max-w-5xl mx-auto px-4 sm:px-8 lg:px-12 py-12 sm:py-20">
+    <!-- Back to blog navigation -->
+    <div class="mb-8">
+      <a
+        href="/blog"
+        class="inline-flex items-center gap-2 text-sm font-mono text-canvas-muted hover:text-[#ff2a42] transition-colors cursor-pointer"
+      >
+        <span>←</span>
+        <span>Back to all articles</span>
+      </a>
+    </div>
+
+    <!-- Article Header -->
+    <header class="space-y-5 pb-8 border-b border-canvas">
+      <div class="flex flex-wrap items-center gap-3 text-xs font-mono">
+        <span class="px-3 py-1 rounded-md bg-[#ff2a42]/10 text-[#ff2a42] font-bold border border-[#ff2a42]/30 uppercase tracking-wider">
+          {post.data.category}
+        </span>
+        <span class="text-canvas-muted">•</span>
+        <time datetime={post.data.pubDate.toISOString()} class="text-canvas-muted">{formattedDate}</time>
+        {post.data.readingTime && (
+          <>
+            <span class="text-canvas-muted">•</span>
+            <span class="text-canvas-muted">{post.data.readingTime}</span>
+          </>
+        )}
+      </div>
+
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-canvas-text tracking-tight leading-tight">
+        {post.data.title}
+      </h1>
+
+      <p class="text-lg sm:text-xl text-canvas-muted leading-relaxed font-normal">
+        {post.data.description}
+      </p>
+
+      <!-- Tags -->
+      {post.data.tags && (
+        <div class="flex flex-wrap gap-2 pt-2">
+          {post.data.tags.map((tag: string) => (
+            <span class="text-xs font-mono text-canvas-muted bg-surface-muted px-3 py-1 rounded-md border border-canvas">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      )}
+    </header>
+
+    <!-- Cover Media (Video or Image) -->
+    {post.data.video ? (
+      <div class="my-10 rounded-2xl overflow-hidden border border-canvas shadow-lg bg-[#0b0c14]">
+        <video
+          src={post.data.video}
+          controls
+          playsinline
+          class="w-full aspect-[16/9] object-cover"
+        ></video>
+      </div>
+    ) : post.data.image && (
+      <div class="my-10 rounded-2xl overflow-hidden border border-canvas shadow-lg">
+        <img
+          src={post.data.image}
+          alt={post.data.title}
+          class="w-full aspect-[21/9] object-cover"
+        />
+      </div>
+    )}
+
+    <!-- Article Content (Styled via prose.css) -->
+    <div class="prose-content pt-4 max-w-none">
+      <Content />
+    </div>
+
+    <!-- Footer callout -->
+    <div class="mt-16 pt-8 border-t border-canvas flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-surface border border-canvas flex items-center justify-center text-[#ff2a42] font-black text-sm font-mono shadow-sm">
+          808
+        </div>
+        <div>
+          <div class="text-base font-bold text-canvas-text">Written by Iheb Brahmi</div>
+          <div class="text-xs text-canvas-muted font-mono">SUP'COM ICT Engineer • Edge AI & Cybersecurity</div>
+        </div>
+      </div>
+
+      <a
+        href="https://github.com/808THRONE"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-surface hover:bg-surface-hover text-canvas-text text-xs font-mono border border-canvas transition-colors shadow-sm cursor-pointer"
+      >
+        Follow on GitHub →
+      </a>
+    </div>
+  </article>
+
+  <script>
+    import mermaid from 'mermaid';
+
+    async function renderMermaidDiagrams() {
+      // Find code blocks with language-mermaid
+      const mermaidCodeElements = document.querySelectorAll(
+        'pre[data-language="mermaid"], pre > code.language-mermaid, pre.mermaid, code[class*="language-mermaid"]'
+      );
+      if (!mermaidCodeElements.length) return;
+
+      const isLight = document.documentElement.classList.contains('light');
+
+      mermaid.initialize({
+        startOnLoad: false,
+        theme: isLight ? 'neutral' : 'dark',
+        themeVariables: {
+          darkMode: !isLight,
+          background: isLight ? '#f8fafc' : '#0b0c14',
+          primaryColor: '#ff2a42',
+          primaryTextColor: isLight ? '#0f172a' : '#f1f5f9',
+          primaryBorderColor: '#ff2a42',
+          lineColor: isLight ? '#64748b' : '#94a3b8',
+          secondaryColor: isLight ? '#f1f5f9' : '#161926',
+          tertiaryColor: isLight ? '#e2e8f0' : '#1a1d2d',
+          fontFamily: 'ui-sans-serif, system-ui, -apple-system, sans-serif'
+        }
+      });
+
+      const targets: HTMLElement[] = [];
+      mermaidCodeElements.forEach((el, index) => {
+        const pre = el.tagName === 'PRE' ? el : el.closest('pre');
+        if (!pre || pre.getAttribute('data-mermaid-processed')) return;
+        pre.setAttribute('data-mermaid-processed', 'true');
+
+        const rawCode = el.textContent || '';
+        const container = document.createElement('div');
+        container.className = 'my-8 p-6 rounded-2xl border border-canvas bg-surface-muted/50 flex flex-col items-center justify-center overflow-x-auto shadow-sm';
+
+        const mermaidDiv = document.createElement('div');
+        mermaidDiv.className = 'mermaid w-full flex justify-center text-center';
+        mermaidDiv.textContent = rawCode.trim();
+        mermaidDiv.id = `mermaid-diagram-${index}`;
+
+        container.appendChild(mermaidDiv);
+        pre.replaceWith(container);
+        targets.push(mermaidDiv);
+      });
+
+      if (targets.length > 0) {
+        try {
+          await mermaid.run({
+            nodes: targets
+          });
+        } catch (err) {
+          console.error('Mermaid render error:', err);
+        }
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', renderMermaidDiagrams);
+    } else {
+      renderMermaidDiagrams();
+    }
+  </script>
+</BaseLayout>

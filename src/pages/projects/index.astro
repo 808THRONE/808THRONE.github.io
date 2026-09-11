@@ -1,0 +1,103 @@
+---
+// projects/index.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+let projects: any[] = [];
+let categories: string[] = [];
+
+try {
+  projects = await getCollection('projects');
+  projects.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+  const catSet = new Set<string>();
+  projects.forEach((p) => catSet.add(p.data.category));
+  categories = Array.from(catSet);
+} catch (e) {
+  console.log("Error loading projects:", e);
+}
+---
+
+<BaseLayout
+  title="Projects & Engineering Portfolio | Iheb Brahmi"
+  description="Showcase of Edge AI systems, embedded hardware, networking systems, and cybersecurity tooling built by Iheb Brahmi."
+>
+  <div class="max-w-[1400px] w-full mx-auto px-4 sm:px-8 lg:px-12 py-12 sm:py-20">
+    <!-- Header -->
+    <div class="space-y-4 max-w-3xl mb-12">
+      <div class="inline-flex items-center gap-2 text-xs font-mono tracking-widest text-[#ff2a42] font-semibold uppercase">
+        <span class="w-2 h-2 rounded-full bg-[#ff2a42]"></span>
+        PORTFOLIO
+      </div>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-canvas-text tracking-tight">
+        Featured Projects & Systems
+      </h1>
+      <p class="text-canvas-muted text-base sm:text-lg lg:text-xl leading-relaxed">
+        Hardware-constrained AI models, high-performance command-line utilities, IAM security prototypes, and RF radar systems.
+      </p>
+    </div>
+
+    <!-- Category Filter Buttons -->
+    <div class="flex flex-wrap items-center gap-2.5 mb-12 pb-6 border-b border-canvas">
+      <span class="text-xs font-mono text-canvas-muted mr-2">FILTER:</span>
+      <button
+        class="proj-filter-btn px-4 py-1.5 rounded-lg text-xs font-mono bg-[#ff2a42] text-white transition-all cursor-pointer shadow-sm"
+        data-category="all"
+      >
+        All ({projects.length})
+      </button>
+      {categories.map((cat) => (
+        <button
+          class="proj-filter-btn px-4 py-1.5 rounded-lg text-xs font-mono bg-surface hover:bg-surface-hover text-canvas-muted hover:text-canvas-text border border-canvas transition-all cursor-pointer"
+          data-category={cat}
+        >
+          {cat}
+        </button>
+      ))}
+    </div>
+
+    <!-- Projects Grid -->
+    <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {projects.map((project) => (
+        <div class="project-item" data-category={project.data.category}>
+          <ProjectCard
+            title={project.data.title}
+            category={project.data.category}
+            description={project.data.description}
+            tags={project.data.tags}
+            image={project.data.image}
+            slug={project.id.replace(/\.md$/, '')}
+            github={project.data.github}
+            metrics={project.data.metrics}
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  const buttons = document.querySelectorAll('.proj-filter-btn');
+  const items = document.querySelectorAll('.project-item');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const selected = btn.getAttribute('data-category');
+      
+      buttons.forEach(b => {
+        b.classList.remove('bg-[#ff2a42]', 'text-white');
+        b.classList.add('bg-surface', 'text-canvas-muted');
+      });
+      btn.classList.remove('bg-surface', 'text-canvas-muted');
+      btn.classList.add('bg-[#ff2a42]', 'text-white');
+
+      items.forEach(item => {
+        if (selected === 'all' || item.getAttribute('data-category') === selected) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>

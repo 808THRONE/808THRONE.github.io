@@ -1,0 +1,162 @@
+---
+// about.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About Me | Iheb Brahmi (808THRONE)"
+  description="Background, engineering education at SUP'COM, experience in Edge AI & Cybersecurity, and technical certifications."
+>
+  <div class="max-w-5xl mx-auto px-4 sm:px-8 lg:px-12 py-12 sm:py-20">
+    
+    <!-- Header -->
+    <div class="space-y-4 mb-16 pb-8 border-b border-canvas">
+      <div class="inline-flex items-center gap-2 text-xs font-mono tracking-widest text-[#ff2a42] font-semibold uppercase">
+        <span class="w-2 h-2 rounded-full bg-[#ff2a42]"></span>
+        ENGINEERING PROFILE
+      </div>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-canvas-text tracking-tight">
+        Iheb Brahmi
+      </h1>
+      <p class="text-xl sm:text-2xl text-canvas-muted font-medium">
+        ICT Engineer • Networking, Cybersecurity, Systems and Edge AI
+      </p>
+      <div class="flex flex-wrap items-center gap-4 text-xs font-mono text-canvas-muted pt-2">
+        <span>📍 Ariana, Tunisia</span>
+        <span>•</span>
+        <span>📧 iheb.brahmi@supcom.tn</span>
+        <span>•</span>
+        <a href="https://github.com/808THRONE" target="_blank" rel="noopener noreferrer" class="text-[#ff2a42] hover:underline">github.com/808THRONE</a>
+        <span>•</span>
+        <a href="https://www.linkedin.com/in/iheb-brahmi-3a5315369/" target="_blank" rel="noopener noreferrer" class="text-[#ff2a42] hover:underline">LinkedIn Profile</a>
+      </div>
+    </div>
+
+    <!-- Summary -->
+    <section class="space-y-4 mb-16">
+      <h2 class="text-2xl sm:text-3xl font-bold text-canvas-text flex items-center gap-3">
+        <span class="text-[#ff2a42]">#</span> Professional Summary
+      </h2>
+      <p class="text-canvas-muted leading-relaxed text-base sm:text-lg">
+        Fresh SUP’COM ICT engineering graduate specializing in cybersecurity, with internship experience across Edge AI, secure developer tooling, and embedded systems. 
+        Built real-time computer-vision applications for constrained hardware, contributed to language models for secure-code generation, and developed radar-based embedded devices. 
+        Passionate about reliable, deterministic systems where networking, software, hardware, and security intersect.
+      </p>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section class="space-y-8 mb-16">
+      <h2 class="text-2xl sm:text-3xl font-bold text-canvas-text flex items-center gap-3">
+        <span class="text-[#ff2a42]">#</span> Engineering Experience
+      </h2>
+
+      <div class="space-y-8 border-l border-canvas ml-3 pl-6">
+        <!-- Job 1 -->
+        <div class="relative group">
+          <span class="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-[#ff2a42] ring-4 ring-[var(--bg-canvas)]"></span>
+          <div class="space-y-1">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h3 class="text-lg font-bold text-canvas-text">End-of-Study Engineering Intern</h3>
+              <span class="text-xs font-mono text-canvas-muted">Feb 2026 – June 2026</span>
+            </div>
+            <div class="text-sm font-semibold text-[#ff2a42]">Screenflex • Tunis, Tunisia</div>
+            <p class="text-xs font-mono text-canvas-muted italic">ScreenLens: Optimization of AI Models for Low-Resource Embedded Systems</p>
+            <ul class="text-sm text-canvas-muted list-disc list-outside ml-4 space-y-1 pt-2 leading-relaxed">
+              <li>Designed <strong class="text-canvas-text">InStoreLens</strong> (dual-camera footfall/demographic analytics) and <strong class="text-canvas-text">FocusTrack</strong> (audience-engagement tracking).</li>
+              <li>Isolated camera I/O, UI, and model inference via multiprocessing and bounded FIFO backpressure queues.</li>
+              <li>Reduced per-frame compute load by <strong class="text-canvas-text">&gt;40%</strong> by eliminating redundant face-detection passes.</li>
+              <li>Exported ONNX models and compiled TensorRT FP16 engines on NVIDIA Jetson Orin Nano, achieving <strong class="text-canvas-text">22.8 FPS</strong> and <strong class="text-canvas-text">18.5 FPS</strong>.</li>
+              <li>Fine-tuned MiVOLO Vision Transformers with temporal smoothing and engagement state machines.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Job 2 -->
+        <div class="relative group">
+          <span class="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-surface group-hover:bg-[#ff2a42] transition-colors ring-4 ring-[var(--bg-canvas)]"></span>
+          <div class="space-y-1">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h3 class="text-lg font-bold text-canvas-text">R&D Engineering Intern</h3>
+              <span class="text-xs font-mono text-canvas-muted">Sep 2025 – Jan 2026</span>
+            </div>
+            <div class="text-sm font-semibold text-[#ff2a42]">6NLG / Secnology • Tunis, Tunisia</div>
+            <p class="text-xs font-mono text-canvas-muted italic">CodeAi: VS Code Assistant for Secure Software Development</p>
+            <ul class="text-sm text-canvas-muted list-disc list-outside ml-4 space-y-1 pt-2 leading-relaxed">
+              <li>Collaborated on creating and fine-tuning an LLM designed to generate vulnerability-free secure source code.</li>
+              <li>Engineered automated workflows generating firewall and SIEM configurations alongside SOAR playbooks from high-level specifications.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Job 3 -->
+        <div class="relative group">
+          <span class="absolute -left-[31px] top-1.5 w-3 h-3 rounded-full bg-surface group-hover:bg-[#ff2a42] transition-colors ring-4 ring-[var(--bg-canvas)]"></span>
+          <div class="space-y-1">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <h3 class="text-lg font-bold text-canvas-text">Firmware Developer Intern</h3>
+              <span class="text-xs font-mono text-canvas-muted">July 2025 – Aug 2025</span>
+            </div>
+            <div class="text-sm font-semibold text-[#ff2a42]">ACTIA Engineering Services • Ariana, Tunisia</div>
+            <ul class="text-sm text-canvas-muted list-disc list-outside ml-4 space-y-1 pt-2 leading-relaxed">
+              <li>Developed C firmware for a radar-based cyclist-safety warning device.</li>
+              <li>Integrated an embedded AI classification model on resource-constrained hardware for low-latency hazard detection.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="space-y-8 mb-16">
+      <h2 class="text-2xl sm:text-3xl font-bold text-canvas-text flex items-center gap-3">
+        <span class="text-[#ff2a42]">#</span> Education
+      </h2>
+
+      <div class="space-y-6">
+        <div class="p-6 rounded-xl bg-surface border border-canvas shadow-sm">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+            <h3 class="text-base sm:text-lg font-bold text-canvas-text">National ICT Engineering Diploma — Cybersecurity Specialization</h3>
+            <span class="text-xs font-mono text-canvas-muted">2023 – July 2026</span>
+          </div>
+          <div class="text-sm text-[#ff2a42] font-semibold mb-2">SUP’COM (Higher School of Communications of Tunis)</div>
+          <p class="text-sm text-canvas-muted leading-relaxed">
+            Coursework: Advanced networking, cybersecurity & cryptography, signal processing, embedded systems, telecommunications.
+          </p>
+        </div>
+
+        <div class="p-6 rounded-xl bg-surface border border-canvas shadow-sm">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+            <h3 class="text-base sm:text-lg font-bold text-canvas-text">Preparatory Cycle for Engineering Studies</h3>
+            <span class="text-xs font-mono text-canvas-muted">2021 – 2023</span>
+          </div>
+          <div class="text-sm text-[#ff2a42] font-semibold mb-2">Faculty of Science of Monastir (FSM)</div>
+          <p class="text-sm text-canvas-muted leading-relaxed">
+            <strong class="text-emerald-400">Ranked top 10% nationally</strong> (168th out of 1,800 candidates) in Tunisia’s national engineering school entrance examination.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Languages & Community -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="p-6 rounded-xl bg-surface border border-canvas space-y-3 shadow-sm">
+        <h3 class="text-base font-bold text-canvas-text">Languages</h3>
+        <ul class="text-sm text-canvas-muted space-y-2 font-mono">
+          <li class="flex justify-between"><span>English</span><span class="text-emerald-400">Advanced (TOEIC 935)</span></li>
+          <li class="flex justify-between"><span>French</span><span class="text-canvas-text">Intermediate</span></li>
+          <li class="flex justify-between"><span>Arabic</span><span class="text-canvas-text">Native</span></li>
+        </ul>
+      </div>
+
+      <div class="p-6 rounded-xl bg-surface border border-canvas space-y-3 shadow-sm">
+        <h3 class="text-base font-bold text-canvas-text">Community & Leadership</h3>
+        <ul class="text-sm text-canvas-muted space-y-2 leading-relaxed">
+          <li>• <strong class="text-canvas-text">SUP’COM Cybersecurity Club</strong>: Hackfest organization & security challenges.</li>
+          <li>• <strong class="text-canvas-text">P.A.C.T.E. Community Project</strong>: Transforming public spaces into safer community areas.</li>
+          <li>• <strong class="text-canvas-text">Entrepreneurial Challenge</strong>: Project ranked 1st in section.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</BaseLayout>

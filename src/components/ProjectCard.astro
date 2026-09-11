@@ -1,0 +1,81 @@
+---
+// ProjectCard.astro
+interface Props {
+  title: string;
+  category: string;
+  description: string;
+  tags: string[];
+  image?: string;
+  slug: string;
+  github?: string;
+  metrics?: string[];
+}
+
+const { title, category, description, tags, image, slug, github, metrics } = Astro.props;
+---
+
+<div class="flex flex-col bg-surface border border-canvas hover:border-[#ff2a42]/70 rounded-xl overflow-hidden card-hover-effect group shadow-sm">
+  <!-- Card Image (if available) -->
+  {image && (
+    <a href={`/projects/${slug}`} class="block relative aspect-[16/9] overflow-hidden bg-surface-muted">
+      <img
+        src={image}
+        alt={title}
+        class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+        loading="lazy"
+      />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60"></div>
+    </a>
+  )}
+
+  <div class="p-6 flex-grow flex flex-col justify-between space-y-4">
+    <div class="space-y-2.5">
+      <!-- Category -->
+      <div class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#ff2a42]">
+        {category}
+      </div>
+
+      <!-- Title -->
+      <h3 class="text-xl font-bold text-canvas-text group-hover:text-[#ff2a42] transition-colors leading-snug">
+        <a href={`/projects/${slug}`}>
+          {title}
+        </a>
+      </h3>
+
+      <!-- Description -->
+      <p class="text-sm text-canvas-muted line-clamp-2 leading-relaxed">
+        {description}
+      </p>
+
+      <!-- Key metric if present -->
+      {metrics && metrics.length > 0 && (
+        <div class="pt-1">
+          <span class="inline-block text-[11px] font-mono text-emerald-400 bg-emerald-950/30 dark:bg-emerald-950/50 border border-emerald-700/40 px-2.5 py-1 rounded">
+            ⚡ {metrics[0]}
+          </span>
+        </div>
+      )}
+    </div>
+
+    <!-- Bottom tags & arrow link -->
+    <div class="pt-4 border-t border-canvas flex items-center justify-between">
+      <div class="flex flex-wrap gap-1.5">
+        {tags.slice(0, 3).map((tag) => (
+          <span class="text-[10px] font-mono text-canvas-muted bg-surface-muted px-2.5 py-1 rounded border border-canvas">
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      <a
+        href={`/projects/${slug}`}
+        class="text-canvas-muted group-hover:text-[#ff2a42] transition-transform group-hover:translate-x-1 p-1"
+        aria-label={`View ${title}`}
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</div>

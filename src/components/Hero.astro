@@ -1,0 +1,100 @@
+---
+// Hero.astro
+---
+
+<section class="relative pt-12 pb-16 md:py-24 overflow-hidden border-b border-canvas">
+  <div class="max-w-[1400px] w-full mx-auto px-4 sm:px-8 lg:px-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      
+      <!-- Left Column: Copy & CTAs (7 cols) -->
+      <div class="lg:col-span-7 space-y-6 z-10">
+        <!-- Tagline Pills -->
+        <div class="inline-flex items-center gap-2 text-xs font-mono tracking-widest text-canvas-muted uppercase">
+          <span>PORTFOLIO</span>
+          <span class="text-[#ff2a42]">/</span>
+          <span>BLOG</span>
+          <span class="text-[#ff2a42]">/</span>
+          <span>LEARN</span>
+          <span class="text-[#ff2a42]">/</span>
+          <span>BUILD</span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-canvas-text leading-[1.1]">
+          Hi, I’m <span class="text-[#ff2a42]">Iheb</span>.<br />
+          I build things, solve problems, and share what I learn.
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-base sm:text-lg lg:text-xl text-canvas-muted max-w-2xl leading-relaxed">
+          Fresh SUP'COM ICT Engineering graduate specializing in cybersecurity, networking, systems, and Edge AI. 
+          This is my personal space — a mix of my portfolio, projects, technical blog posts, and thoughts on AI, cybersecurity, and constrained hardware.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap items-center gap-4 pt-4">
+          <a
+            href="/projects"
+            class="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#ff2a42] hover:bg-[#e01e35] text-white font-bold text-sm sm:text-base transition-all shadow-[0_0_25px_rgba(255,42,66,0.35)] hover:shadow-[0_0_35px_rgba(255,42,66,0.55)] cursor-pointer"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>
+            Explore My Projects
+            <span class="text-xs font-bold">→</span>
+          </a>
+
+          <a
+            href="/blog"
+            class="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-surface hover:bg-surface-hover text-canvas-text font-semibold text-sm sm:text-base border border-canvas hover:border-[#ff2a42] transition-colors cursor-pointer"
+          >
+            <svg class="w-4 h-4 text-[#ff2a42]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            Read My Blog
+          </a>
+        </div>
+
+        <!-- Social Icons Row (with updated real LinkedIn) -->
+        <div class="flex items-center gap-5 pt-4 text-canvas-muted">
+          <a href="https://github.com/808THRONE" target="_blank" rel="noopener noreferrer" class="hover:text-[#ff2a42] transition-colors" aria-label="GitHub">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+          </a>
+          <a href="https://www.linkedin.com/in/iheb-brahmi-3a5315369/" target="_blank" rel="noopener noreferrer" class="hover:text-[#ff2a42] transition-colors" aria-label="LinkedIn">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28M7.85 18.5V10.1H5.06v8.4h2.79z" />
+            </svg>
+          </a>
+          <a href="mailto:iheb.brahmi@supcom.tn" class="hover:text-[#ff2a42] transition-colors" aria-label="Email">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Hero High-Res Graphic (5 cols) -->
+      <div class="lg:col-span-5 relative flex justify-center items-center">
+        <!-- Floating Red Accent Tag (as in mockup) -->
+        <div class="absolute top-6 right-6 z-20 hidden sm:block border-l-2 border-[#ff2a42] pl-3 py-1.5 bg-surface/85 backdrop-blur-md rounded-r shadow-lg border-y border-r border-canvas">
+          <div class="text-[11px] font-mono tracking-widest text-canvas-text font-bold uppercase">BETTER SYSTEMS</div>
+          <div class="text-[11px] font-mono tracking-widest text-[#ff2a42] font-bold uppercase">A BRIGHTER FUTURE</div>
+        </div>
+
+        <!-- Atmospheric Silhouette Graphic -->
+        <div class="relative w-full max-w-lg aspect-[3/4] rounded-2xl overflow-hidden border border-canvas shadow-[0_15px_50px_rgba(0,0,0,0.4)] group">
+          <img
+            src="/assets/hero_figure.jpg"
+            alt="Hero Atmosphere Artwork"
+            class="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700"
+          />
+          <!-- Subtle vignette overlay -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

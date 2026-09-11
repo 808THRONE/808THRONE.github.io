@@ -1,0 +1,75 @@
+---
+// Logo.astro
+interface Props {
+  size?: 'sm' | 'md' | 'lg';
+  showText?: boolean;
+}
+
+const { size = 'md', showText = true } = Astro.props;
+
+const dimensionMap = {
+  sm: 'w-7 h-7',
+  md: 'w-9 h-9',
+  lg: 'w-12 h-12',
+};
+
+const textSizeMap = {
+  sm: 'text-base',
+  md: 'text-lg sm:text-xl',
+  lg: 'text-2xl',
+};
+---
+
+<div class="flex items-center gap-3 group select-none">
+  <!-- Crazy Cyber-Rebel Emblem (SVG) -->
+  <div class={`relative ${dimensionMap[size]} flex items-center justify-center shrink-0`}>
+    <!-- Ambient Red Glow Filter -->
+    <svg class="w-full h-full filter drop-shadow-[0_0_12px_rgba(255,42,66,0.65)] group-hover:drop-shadow-[0_0_22px_rgba(255,42,66,0.95)] transition-all duration-300 transform group-hover:scale-110" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="cyberRed" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#FF596B" />
+          <stop offset="50%" stop-color="#FF2A42" />
+          <stop offset="100%" stop-color="#990018" />
+        </linearGradient>
+        <linearGradient id="cyberDark" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#2D3047" />
+          <stop offset="100%" stop-color="#14151F" />
+        </linearGradient>
+      </defs>
+
+      <!-- Outer Stealth Armor Plate -->
+      <polygon points="50,4 94,26 82,78 50,96 18,78 6,26" fill="url(#cyberDark)" stroke="#FF2A42" stroke-width="2.5" stroke-linejoin="round" />
+      
+      <!-- Inner Faceted Wings -->
+      <polygon points="50,14 84,32 74,72 50,86 26,72 16,32" fill="#0B0C12" stroke="#FF2A42" stroke-width="1.5" opacity="0.9" />
+
+      <!-- Center Aggressive Rebel Delta / Horns -->
+      <path d="M50 20 L68 46 L58 48 L64 68 L50 58 L36 68 L42 48 L32 46 Z" fill="url(#cyberRed)" />
+
+      <!-- Glowing Core Aperture -->
+      <polygon points="50,38 56,48 50,54 44,48" fill="#FFFFFF" class="animate-pulse" />
+      
+      <!-- Lateral Cyber Tech Cuts -->
+      <line x1="12" y1="40" x2="22" y2="45" stroke="#FF2A42" stroke-width="2" />
+      <line x1="88" y1="40" x2="78" y2="45" stroke="#FF2A42" stroke-width="2" />
+      <circle cx="50" cy="8" r="2.5" fill="#FF2A42" />
+    </svg>
+  </div>
+
+  <!-- Styled Brand Text without collision -->
+  {showText && (
+    <div class="flex flex-col justify-center">
+      <div class={`font-black tracking-wider leading-none ${textSizeMap[size]} flex items-center`}>
+        <span class="text-canvas-text font-mono">THE</span>
+        <span class="text-[#ff2a42] px-1 font-mono">RED</span>
+        <span class="text-canvas-text font-mono">REBEL</span>
+      </div>
+      <div class="flex items-center gap-1.5 pt-1">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#ff2a42] shadow-[0_0_6px_#ff2a42]"></span>
+        <span class="text-[10px] font-mono tracking-[0.25em] text-canvas-muted group-hover:text-[#ff2a42] uppercase transition-colors">
+          808THRONE
+        </span>
+      </div>
+    </div>
+  )}
+</div>

@@ -1,0 +1,123 @@
+---
+// SkillsGrid.astro
+const skills = [
+  {
+    title: 'Networking & Infrastructure',
+    desc: 'Cisco CCNA 1–3, TCP/IP, IPv4/IPv6, Subnetting, Switching, Routing, GNS3, Packet Tracer',
+    icon: 'network',
+    color: 'text-blue-400',
+    borderHover: 'hover:border-blue-500/50'
+  },
+  {
+    title: 'Cybersecurity & Defense',
+    desc: 'Cisco CyberOps, Huawei Security, Firewalls, SIEM, SOAR Playbooks, Linux Hardening',
+    icon: 'shield',
+    color: 'text-amber-400',
+    borderHover: 'hover:border-amber-500/50'
+  },
+  {
+    title: 'Edge AI & Computer Vision',
+    desc: 'PyTorch, TensorRT FP16, ONNX, OpenCV, MediaPipe, YOLO, MiVOLO, Jetson Orin Nano',
+    icon: 'brain',
+    color: 'text-purple-400',
+    borderHover: 'hover:border-purple-500/50'
+  },
+  {
+    title: 'Embedded & Hardware',
+    desc: 'NVIDIA Jetson, Raspberry Pi 5, VHDL, Vivado, Quartus, FMCW Radar, gprMax',
+    icon: 'cpu',
+    color: 'text-emerald-400',
+    borderHover: 'hover:border-emerald-500/50'
+  },
+  {
+    title: 'Systems & Programming',
+    desc: 'Python, C, C++, Bash, Linux Kernel, x86/ARM Assembly, Multiprocessing, IPC, Git',
+    icon: 'code',
+    color: 'text-cyan-400',
+    borderHover: 'hover:border-cyan-500/50'
+  },
+  {
+    title: 'DevOps & Virtualization',
+    desc: 'Proxmox VE 9.2, Docker, Linux Containers (LXC), QEMU, GDB, Tailscale Mesh',
+    icon: 'cloud',
+    color: 'text-sky-400',
+    borderHover: 'hover:border-sky-500/50'
+  },
+];
+---
+
+<section class="py-16 md:py-24 border-b border-canvas">
+  <div class="max-w-[1400px] w-full mx-auto px-4 sm:px-8 lg:px-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+      
+      <!-- Left Column: About copy (5 cols) -->
+      <div class="lg:col-span-5 space-y-6">
+        <div class="inline-flex items-center gap-2 text-xs font-mono tracking-widest text-[#ff2a42] font-semibold uppercase">
+          <span class="w-2 h-2 rounded-full bg-[#ff2a42]"></span>
+          ABOUT ME
+        </div>
+
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-canvas-text tracking-tight leading-tight">
+          Turning ideas into <span class="text-[#ff2a42]">real projects</span>.
+        </h2>
+
+        <p class="text-canvas-muted leading-relaxed text-sm sm:text-base lg:text-lg">
+          I'm an ICT engineer specializing in networking, cybersecurity, systems, and Edge AI. 
+          I love dissecting complex problems, engineering deterministic low-latency software, configuring resilient networks, and sharing my journey through code and technical writeups.
+        </p>
+
+        <!-- Meta badges -->
+        <div class="flex flex-wrap items-center gap-3 pt-2 text-xs font-mono text-canvas-text">
+          <div class="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface border border-canvas shadow-sm">
+            <span>📍</span>
+            <span>Tunisia</span>
+          </div>
+          <div class="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface border border-canvas shadow-sm">
+            <span>🎓</span>
+            <span>SUP'COM ICT Engineer</span>
+          </div>
+          <div class="flex items-center gap-2 px-3.5 py-2 rounded-lg bg-surface border border-canvas shadow-sm">
+            <span class="text-[#ff2a42] font-bold">&lt;/&gt;</span>
+            <span>Always Building</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Skills Matrix (7 cols, 2-column grid of 6 cards) -->
+      <div class="lg:col-span-7">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {skills.map((s) => (
+            <div class={`p-5 rounded-xl bg-surface border border-canvas transition-all card-hover-effect ${s.borderHover} group shadow-sm`}>
+              <div class="flex items-center gap-3 mb-2.5">
+                <!-- Icon container -->
+                <div class={`w-10 h-10 rounded-lg bg-surface-muted border border-canvas flex items-center justify-center ${s.color} transition-transform group-hover:scale-105`}>
+                  {s.icon === 'network' && (
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/></svg>
+                  )}
+                  {s.icon === 'shield' && (
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                  )}
+                  {s.icon === 'brain' && (
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                  )}
+                  {s.icon === 'cpu' && (
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"/></svg>
+                  )}
+                  {s.icon === 'code' && (
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                  )}
+                  {s.icon === 'cloud' && (
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+                  )}
+                </div>
+                <h3 class="text-sm font-bold text-canvas-text group-hover:text-[#ff2a42] transition-colors">{s.title}</h3>
+              </div>
+              <p class="text-xs text-canvas-muted font-mono pl-1 leading-relaxed">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

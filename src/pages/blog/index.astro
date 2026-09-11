@@ -1,0 +1,111 @@
+---
+// blog/index.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+let posts: any[] = [];
+let allTags: string[] = [];
+
+try {
+  posts = await getCollection('blog');
+  posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  const tagSet = new Set<string>();
+  posts.forEach(p => p.data.tags?.forEach((t: string) => tagSet.add(t)));
+  allTags = Array.from(tagSet);
+} catch (e) {
+  console.log("Error loading blog posts:", e);
+}
+---
+
+<BaseLayout
+  title="Blog & Technical Writing | Iheb Brahmi"
+  description="Technical articles, architecture guides, and practical lessons on Edge AI, Cybersecurity, and Linux systems."
+>
+  <div class="max-w-[1400px] w-full mx-auto px-4 sm:px-8 lg:px-12 py-12 sm:py-20">
+    <!-- Header -->
+    <div class="space-y-4 max-w-3xl mb-12">
+      <div class="inline-flex items-center gap-2 text-xs font-mono tracking-widest text-[#ff2a42] font-semibold uppercase">
+        <span class="w-2 h-2 rounded-full bg-[#ff2a42]"></span>
+        TECHNICAL WRITING
+      </div>
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-canvas-text tracking-tight">
+        Articles & Field Notes
+      </h1>
+      <p class="text-canvas-muted text-base sm:text-lg lg:text-xl leading-relaxed">
+        Deep dives, architectural decisions, and hands-on lessons learned while building reliable systems, optimizing AI models, and hardening infrastructure.
+      </p>
+    </div>
+
+    <!-- Tag Pills Filter -->
+    {allTags.length > 0 && (
+      <div class="flex flex-wrap items-center gap-2.5 mb-12 pb-6 border-b border-canvas">
+        <span class="text-xs font-mono text-canvas-muted mr-2">TOPICS:</span>
+        <button
+          class="tag-filter-btn px-4 py-1.5 rounded-lg text-xs font-mono bg-[#ff2a42] text-white transition-all cursor-pointer shadow-sm"
+          data-tag="all"
+        >
+          All ({posts.length})
+        </button>
+        {allTags.map((tag) => (
+          <button
+            class="tag-filter-btn px-4 py-1.5 rounded-lg text-xs font-mono bg-surface hover:bg-surface-hover text-canvas-muted hover:text-canvas-text border border-canvas transition-all cursor-pointer"
+            data-tag={tag}
+          >
+            #{tag}
+          </button>
+        ))}
+      </div>
+    )}
+
+    <!-- Posts Grid -->
+    <div id="posts-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {posts.map((post) => (
+        <div class="post-item" data-tags={post.data.tags?.join(',') || ''}>
+          <BlogCard
+            title={post.data.title}
+            category={post.data.category}
+            pubDate={post.data.pubDate}
+            slug={post.id.replace(/\.md$/, '')}
+            image={post.data.image}
+            description={post.data.description}
+            readingTime={post.data.readingTime}
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  const buttons = document.querySelectorAll('.tag-filter-btn');
+  const items = document.querySelectorAll('.post-item');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const selected = btn.getAttribute('data-tag');
+      
+      // Update button styling
+      buttons.forEach(b => {
+        b.classList.remove('bg-[#ff2a42]', 'text-white');
+        b.classList.add('bg-surface', 'text-canvas-muted');
+      });
+      btn.classList.remove('bg-surface', 'text-canvas-muted');
+      btn.classList.add('bg-[#ff2a42]', 'text-white');
+
+      // Filter post cards
+      items.forEach(item => {
+        if (selected === 'all') {
+          item.classList.remove('hidden');
+        } else {
+          const tags = item.getAttribute('data-tags') || '';
+          if (tags.includes(selected)) {
+            item.classList.remove('hidden');
+          } else {
+            item.classList.add('hidden');
+          }
+        }
+      });
+    });
+  });
+</script>
